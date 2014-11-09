@@ -45,14 +45,23 @@ import os
 import click
 
 
+def ensure_dir_exists(path, name):
+	"""
+		makes the directory if it doesnt already exist;
+		returns path to it
+	"""
+	root = os.path.join(path, name)
+	if not os.path.exists(root):
+		os.mkdir(root)
+	return root
+
+
 def make_module_dir(path, name):
 	"""
 		makes a directory in the path with an __init__.py
 		file in it; returns path to its root
 	"""
-	module_root = os.path.join(path, name)
-	if not os.path.exists(module_root):
-		os.mkdir(module_root)
+	module_root = ensure_dir_exists(path, name)
 	open(os.path.join(module_root, '__init__.py'), 'a').close()
 	return module_root
 
@@ -61,7 +70,8 @@ def make_module_dir(path, name):
 @click.command()
 @click.argument('project_name', type=str)
 @click.argument('project_path', type=click.Path(exists=True))
-def pyroJect(project_name, project_path):
+@click.option('--data', '-d', is_flag=True)
+def pyroJect(project_name, project_path, data):
 
 	#=====[ Step 1: root dir	]=====
 	root_dir = make_module_dir(project_path, project_name)
@@ -69,6 +79,8 @@ def pyroJect(project_name, project_path):
 	#=====[ Step 2: top-level subdirs	]=====
 	src_dir = make_module_dir(root_dir, project_name)
 	tests_dir = make_module_dir(root_dir, 'tests')
+	if data:
+		data_dir = ensure_dir_exists(root_dir, 'data')
 
 
 if __name__ == '__main__':
