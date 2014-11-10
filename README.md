@@ -41,16 +41,15 @@ In [1]: import my_project
 ```
 
 #### .gitignore
-the .gitignore file will ignore all of the following filetypes:
-
-* .pyc
-
-* .pkl
-
-* .json
-
-* .npy
-
+.gitignore will instruct git to ignore files as follows:
+```
+*.pyc
+*.pkl
+*.json
+*.npy
+```
+These are typically temporary files; this may not be appropriate for all python programs,
+however.
 
 
 
@@ -61,9 +60,11 @@ In order to install pyroJect, clone the repository and run configure.sh:
 	chmod +x configure.sh
 	./configure.sh
 ```
-This will add the repository to your $PATH environmental variable as well 
-as creates an executable, pyroJect, that will be executed by your default
-python.
+This will:
+
+- add pyroJect to your $PATH
+- add well-marked in your ~/.bash_profile to always include pyroJect in your $PATH
+- create an executable, ./pyroJect, that will be run by your default python
 
 
 
@@ -82,6 +83,7 @@ or
 	pyroJect project_name . --data
 ```
 Creating a project with a data directory will also ensure that the 
-$DATA_DIR environmental variable is set.
+$DATA_DIR environmental variable is set when you run your project's 
+configure.sh
 
 
