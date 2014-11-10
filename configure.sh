@@ -3,6 +3,7 @@
 USER_PYTHON=`which python`
 echo "- Using python located at: $USER_PYTHON"
 
+
 #=====[ Step 2: remove all hashbangs from pyroJect.py	]=====
 TOP_LINE=`head -n 1 pyroJect.py`
 while [ ${TOP_LINE:0:2} = "#!" ]
@@ -11,10 +12,12 @@ do
 	TOP_LINE=`head -n 1 pyroJect.py`
 done
 
+
 #=====[ Step 3: make pyroJect hashbanged/executable	]=====
 echo '#!'$USER_PYTHON | cat - pyroJect.py > temp && mv temp pyroJect
 chmod +x pyroJect
 echo "- Created executable ./pyroJect"
+
 
 #=====[ Step 4: add this path to .bash_profile, if it doesn't already exist	]=====
 #Copied/modified from:
