@@ -1,11 +1,9 @@
 # pyroJect
-Jay Hack
-jhack@stanford.edu
-Fall 2014
+This project allows one to quickly set up python project skeletons.
+by Jay Hack (jhack@stanford.edu), Fall 2014
 
 ## Overview
-This project allows you to quickly set up python project skeletons.
-The project layout is as follows:
+pyroJect takes minimal user input and will set up projects as follows:
 ```
 	project_name/
 		.configure.sh
