@@ -357,10 +357,10 @@ class Test_EXAMPLE(unittest.TestCase):
 			makes gitignore file in the base directory 
 		"""
 		gitignore_str = """#=====[ Temporary Files	]=====
+*.pyc
 *.pkl
 *.json
 *.npy
-*.pyc
 """
 		gitignore = open(os.path.join(self.root_dir, '.gitignore'), 'w')
 		gitignore.write(gitignore_str)
