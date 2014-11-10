@@ -9,41 +9,45 @@ pyroJect takes minimal user input and will set up projects as follows:
 	project_name/
 		.configure.sh
 		.gitignore
-		project_name/		(source directory)
+		project_name/			(source directory)
 			__init__.py
 			example_class.py
-		scripts/
+		scripts/				
 			__init__.py
 			example_script.py
-		tests/
+		tests/					(nosetests)
 			__init__.py
 			test_EXAMPLE.py
-		data/ 				(optional)
+		data/ 					(optional; specify with -d)
 ```
-### example class/script/tests
+#### example class/script/tests
 Each example class/script/test contains preformatted headers. In addition:
+
 * example_script.py contains a preformatted click script, along with imports
+
 * example_test.py contains a preformatted unittest.TestCase class, along with imports.
 
-### configure.sh
+#### configure.sh
 configure.sh will set environmental variables as follows:
 ```
 export PROJECT_DIR=`pwd`
 export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR
 export DATA_DIR=`pwd`/data #only if -d is specified
 ```
-this allows you to run
+This allows you to import the module from anywhere on your system:
 ```
-In [1]: from my_project import *
+In [1]: import my_project
 ```
-from within a python script or the interactive console from anywhere 
-on your filesystem.
 
-### .gitignore
+#### .gitignore
 the .gitignore file will ignore all of the following filetypes:
+
 * .pyc
+
 * .pkl
+
 * .json
+
 * .npy
 
 
