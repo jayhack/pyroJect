@@ -1,3 +1,4 @@
+#!/Users/jayhack/anaconda/bin/python
 '''
 Script: pyroJect.py
 ===================
@@ -74,15 +75,17 @@ class PyroJect(object):
 		"""
 		#=====[ Step 1: root dir and special files	]=====
 		self.root_dir = self.make_module_dir(self.path, self.name)
-		self.make_gitignore()
-		self.make_configure_script()
 
 		#=====[ Step 2: subdirectories	]=====
 		self.make_source_dir()
 		self.make_scripts_dir()
 		self.make_tests_dir()
 		if self.data:
-			self.data_dir = self.ensure_dir_exists(self.root, 'data')
+			self.data_dir = self.ensure_dir_exists(self.root_dir, 'data')
+
+		#=====[ Step 3: .gitignore and configure.sh	]=====
+		self.make_gitignore()
+		self.make_configure_script()
 
 
 
