@@ -1,5 +1,5 @@
 # pyroJect
-This project allows one to quickly set up python project skeletons.
+Single-command python project setup.
 
 by Jay Hack (jhack@stanford.edu), Fall 2014
 
