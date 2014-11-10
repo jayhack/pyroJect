@@ -177,10 +177,14 @@ class PyroJect(object):
 			header string 
 		"""
 		return '''##################
-%s
-%s
-%s
-##################''' % (self.author, self.email, self.date)
+{author}
+{email}
+{date}
+##################'''.format(	
+								author=self.author, 
+								email=self.email, 
+								date=self.date
+							)
 
 
 	def make_header(self, filetype, name, header_sections):
@@ -188,16 +192,16 @@ class PyroJect(object):
 			returns a full header string for a python file 
 		"""
 		return '''"""
-%s
+{head}
 
-%s
+{body}
 
-%s
-"""''' 	% (	
-			self.make_header_head(filetype, name), 
-			self.make_header_body(filetype, header_sections), 
-			self.make_header_foot()
-		)
+{foot}
+"""'''.format(	
+				head=self.make_header_head(filetype, name), 
+				body=self.make_header_body(filetype, header_sections), 
+				foot=self.make_header_foot()
+			)
 
 
 
