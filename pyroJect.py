@@ -79,7 +79,9 @@ class PyroJect(object):
 		"""
 		pyroJect_dir = os.path.split(__file__)[0]
 		authorship_path = os.path.join(pyroJect_dir, 'authorship.json')
-		print authorship_path
+		if not os.path.exists(authorship_path):
+			print "Error: make sure you create authorship.json"
+			assert False
 		authorship_dict = json.load(open(authorship_path, 'r'))
 		self.author = authorship_dict['author']
 		self.email = authorship_dict['email']

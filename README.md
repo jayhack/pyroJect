@@ -65,6 +65,9 @@ This will:
 - add two well-marked lines in your ~/.bash_profile to always include pyroJect in your $PATH
 - create an executable, ./pyroJect, that will be run by your default python when called.
 
+In addition, create a file './authorship.json' that follows the format of authorship.example.json
+in order to specify your personal details. (These will be included in file headers.)
+
 
 
 
