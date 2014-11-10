@@ -23,9 +23,9 @@ pyroJect takes minimal user input and will set up projects as follows:
 #### example class/script/tests
 Each example class/script/test contains preformatted headers. In addition:
 
-	* scripts/example_script.py contains a preformatted click script, along with imports
+- scripts/example_script.py contains a preformatted click script, along with imports
 
-	* tests/example_test.py contains a preformatted unittest.TestCase class, along with imports.
+- tests/example_test.py contains a preformatted unittest.TestCase class, along with imports.
 
 
 #### configure.sh
