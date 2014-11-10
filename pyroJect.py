@@ -42,7 +42,9 @@ jhack@stanford.edu
 ##################
 '''
 import os
+import json
 import click
+
 
 class PyroJect(object):
 	"""
@@ -63,9 +65,25 @@ class PyroJect(object):
 				- name: name of project 
 				- data: boolean for wether there should be a data dir 
 		"""
+
+		self.find_authorship()
 		self.name = name 
 		self.path = path 
 		self.data = data
+
+
+	def find_authorship(self):
+		"""
+			reads ./authorship.json in order to fill in 
+			authorship details 
+		"""
+		pyroJect_dir = os.path.split(__file__)[0]
+		authorship_path = os.path.join(pyroJect_dir, 'authorship.json')
+		print authorship_path
+		authorship_dict = json.load(open(authorship_path, 'r'))
+		self.author = authorship_dict['author']
+		self.email = authorship_dict['email']
+		self.date = authorship_dict['date']
 
 
 	def build(self):
