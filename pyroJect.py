@@ -270,12 +270,12 @@ class PyroJect(object):
 		return """
 import click
 @click.command()
-def %s():
+def {script_name}():
 	pass 
 
 if __name__ == '__main__':
-	%s()
-""" % (script_name, script_name)
+	{script_name}()
+""".format(script_name=script_name)
 
 
 	def make_script_template(self, name):
