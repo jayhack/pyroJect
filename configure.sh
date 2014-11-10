@@ -17,3 +17,5 @@ echo '#!'$USER_PYTHON | cat - pyroJect.py > temp && mv temp pyroJect.py
 #=====[ Step 4: make the script executable	]=====
 chmod +x pyroJect.py
 
+#=====[ Step 5: add this path to	]=====
+
