@@ -48,8 +48,7 @@ In [1]: import my_project
 *.json
 *.npy
 ```
-These are typically temporary files; this may not be appropriate for all python programs,
-however.
+These are typically temporary files. This may not be appropriate for all python programs.
 
 
 
@@ -63,8 +62,8 @@ In order to install pyroJect, clone the repository and run configure.sh:
 This will:
 
 - add pyroJect to your $PATH
-- add well-marked in your ~/.bash_profile to always include pyroJect in your $PATH
-- create an executable, ./pyroJect, that will be run by your default python
+- add two well-marked lines in your ~/.bash_profile to always include pyroJect in your $PATH
+- create an executable, ./pyroJect, that will be run by your default python when called.
 
 
 
