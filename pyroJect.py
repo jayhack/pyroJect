@@ -21,7 +21,7 @@ Description:
 Args:
 -----
 
-	-d: include a data directory
+	-d (--data): include a data directory
 
 
 Example Usage:
@@ -31,7 +31,7 @@ Example Usage:
 
 	i.e.
 
-		pyroject strong_ai . -d
+		pyroJect strong_ai . -d
 
 
 
