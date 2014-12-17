@@ -104,7 +104,7 @@ class PyroJect(object):
 
 		#=====[ Step 3: .gitignore and configure.sh	]=====
 		self.make_gitignore()
-		self.make_configure_script()
+		self.make_setup_script()
 
 
 
@@ -398,20 +398,30 @@ class Test_EXAMPLE(unittest.TestCase):
 	####################[ CONFIGURE ]###############################################
 	################################################################################
 
-	def make_configure_script(self):
+	def make_setup_script(self):
 		"""
-			makes a .configure.sh script that will include the 
-			current module in your pythonpath
+			makes a setup.py script that allows you to run 
+			python setup.py install 
+			in order to install your module
 		"""
-		configure_str = """export PROJECT_DIR=%s
-export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR
-""" % self.root_dir
+		setup = open(os.path.join(self.root_dir, 'setup.py'), 'w')
+		setup.write("""
+from setuptools import setup, find_packages
 
-		if self.data:
-			configure_str += """\nexport DATA_DIR=%s""" % self.data_dir
-	
-		configure = open(os.path.join(self.root_dir, 'configure.sh'), 'w')
-		configure.write(configure_str)
+setup(
+		name='%s',
+		version='0.0.1',
+		author='%s',
+		author_email='%s',
+		description='',
+		packages=find_packages(),
+		include_package_data=True,
+		install_requires=[
+			'click'
+		]
+)
+""" % (self.name, self.author, self.email))
+
 
 
 
