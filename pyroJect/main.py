@@ -27,26 +27,6 @@ Description:
 			models/ 		#optional (-d)
 
 
-
-Args:
------
-
-	-d (--data): make it a data-scientific application, including 
-					inference base classes and a data directory
-
-
-
-Example Usage:
---------------
-		
-		pyroJect [project_name] [path_to_make] [-d, --data]
-
-	i.e.
-
-		pyroJect strong_ai . -d
-
-
-
 ##################
 Jay Hack
 Fall 2014

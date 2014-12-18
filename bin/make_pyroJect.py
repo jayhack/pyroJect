@@ -30,19 +30,24 @@ Description:
 Args:
 -----
 
+	-n (--name): name of the project 
+	-p (--path): path to make the project 
+	-a (--author): author of the project
+	-e (--email): email associated with the project
 	-d (--data): make it a data-scientific application, including 
 					inference base classes and a data directory
 
+	All arguments will be prompted for if not provided, except for -d.
 
 
 Example Usage:
 --------------
 		
-		pyroJect [project_name] [path_to_make] [-d, --data]
+		make_pyroject.py [-d, --data]
 
 	i.e.
 
-		pyroJect strong_ai . -d
+		make_pyroject.py --name strong_ai --data
 
 
 

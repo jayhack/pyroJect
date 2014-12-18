@@ -7,18 +7,22 @@ by Jay Hack (jhack@stanford.edu), Fall 2014
 pyroJect takes minimal user input and will set up projects as follows:
 ```
 	project_name/
-		.configure.sh
+		
 		.gitignore
-		project_name/			(source directory)
+		
+		setup.py
+
+		tests/
+			__init__.py 
+			test_example.py 
+
+		ModuleName/
 			__init__.py
-			example_class.py
-		scripts/				
-			__init__.py
-			example_script.py
-		tests/					(nosetests)
-			__init__.py
-			test_EXAMPLE.py
-		data/ 					(optional; specify with -d)
+			inference.py 	#optional (-d)
+			util.py
+
+		data/ 				#optional (-d)
+			models/ 		#optional (-d)
 ```
 #### example class/script/tests
 Each example class/script/test contains preformatted headers. In addition:
@@ -27,65 +31,56 @@ Each example class/script/test contains preformatted headers. In addition:
 
 - tests/example_test.py contains a preformatted unittest.TestCase class, along with imports.
 
-
-#### configure.sh
-configure.sh will set environmental variables as follows:
-```
-export PROJECT_DIR=`pwd`
-export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR
-export DATA_DIR=`pwd`/data #only if -d is specified
-```
-This allows you to import the module from anywhere on your system:
-```
-In [1]: import my_project
-```
+### inference and util
+If you choose to make it a data-scientific app (using the -d flag), this will add 
+the file inference.py to the main source directory, as well as util.py. inference.py
+contains abstract classes for performing inferences and util.py contains utilities
+for interfacing. 
 
 #### .gitignore
 .gitignore will instruct git to ignore files as follows:
 ```
-*.pyc
-*.pkl
-*.json
-*.npy
-```
-These are typically temporary files. This may not be appropriate for all python programs.
+	#=====[ Setup Files ]=====
+	build
+	dist
+	*.egg-info
+	templates
 
+	#=====[ Temporary Files	]=====
+	*.pyc
+	*.pkl
+	*.json
+	*.npy
+	*~
+```
+This may not be appropriate for all python programs.
 
 
 
 ## Installation
-In order to install pyroJect, clone the repository and run configure.sh:
+In order to install pyroJect, clone the repository and run the following
 ```
-	chmod +x configure.sh
-	./configure.sh
+	python setup.py install
 ```
-This will:
-
-- add pyroJect to your $PATH
-- add two well-marked lines in your ~/.bash_profile to always include pyroJect in your $PATH
-- create an executable, ./pyroJect, that will be run by your default python when called.
-
-In addition, create a file './authorship.json' that follows the format of authorship.example.json
-in order to specify your personal details. (These will be included in file headers.)
-
+This will ensure that you can run 
+```
+	make_pyroject.py [...]
+```
+in order to make new pyrojects.
 
 
 
 ## Usage:
+Note that all options will be prompted for if not provided, with the 
+exception of the -d flag.
+
 To create a project named project_name in your current directory:
 ```
-	pyroJect project_name .
+	make_pyroject.py --name project_name --path .
 ```
-To optionally include a data directory:
+To optionally make it a data-scientific application:
 ```
-	pyroJect project_name . -d
+	pyroJect --name project_name --path . -d
 ```
-or 
-```
-	pyroJect project_name . --data
-```
-Creating a project with a data directory will also ensure that the 
-$DATA_DIR environmental variable is set when you run your project's 
-configure.sh
 
 
