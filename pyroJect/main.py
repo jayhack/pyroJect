@@ -78,6 +78,8 @@ class PyroJect(object):
 		"""
 		pyroject_dir = os.path.join(os.path.split(__file__)[0], '..')
 		templates_dir = os.path.join(pyroject_dir, 'templates')
+		print templates_dir
+		print os.listdir(templates_dir)
 		if not template_name in os.listdir(templates_dir):
 			raise Exception("Template named %s does not exist" % template_name)
 		else:

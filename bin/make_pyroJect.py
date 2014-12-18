@@ -9,21 +9,28 @@ Description:
 
 	project_name/
 		
+		README.md
+
 		.gitignore
 		
 		setup.py
 
+		project_name/
+			__init__.py
+			util.py
+			example_class.py
+			inference/
+				base_inference.py
+				scipy_inference.py
+
+		scripts/
+
 		tests/
 			__init__.py 
-			test_example.py 
+			example_test.py 
 
-		ModuleName/
-			__init__.py
-			inference.py 	#optional (-d)
-			util.py
-
-		data/ 				#optional (-d)
-			models/ 		#optional (-d)
+		data/ 				
+			models/ 
 
 
 
@@ -34,20 +41,9 @@ Args:
 	-p (--path): path to make the project 
 	-a (--author): author of the project
 	-e (--email): email associated with the project
-	-d (--data): make it a data-scientific application, including 
-					inference base classes and a data directory
+	-t (--template_name): name of the template to use
 
 	All arguments will be prompted for if not provided, except for -d.
-
-
-Example Usage:
---------------
-		
-		make_pyroject.py [-d, --data]
-
-	i.e.
-
-		make_pyroject.py --name strong_ai --data
 
 
 
@@ -65,9 +61,9 @@ from pyroJect import *
 @click.option('-p', '--path', type=click.Path(exists=True), prompt=True)
 @click.option('-a', '--author', type=str, prompt=True)
 @click.option('-e', '--email', type=str, prompt=True)
-@click.option('-d','--data', is_flag=True)
-def make_project(project_name, path, author, email, data):
-	PyroJect(project_name, path, author, email, data).build()
+@click.option('-t','--template_name', prompt=True)
+def make_project(project_name, path, author, email, template_name):
+	PyroJect(project_name, author, email, template_name).build(path)
 
 
 if __name__ == '__main__':
