@@ -8,6 +8,9 @@ setup(
 		description='utility to quickly create python project skeletons',
 		packages=find_packages(),
 		include_package_data=True,
+		package_data={
+			'templates':['*']
+		},
 		install_requires=[
 			'click',
 			'scipy',
