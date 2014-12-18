@@ -68,7 +68,7 @@ class PyroJect(object):
 	#=====[ templates	]=====
 	base_path = os.path.join(os.path.split(__file__)[0], '..')
 	config_path = '~/.pyroJect_config'
-	templates_path = os.path.join(base_path, 'templates')
+	templates_path = os.path.join(base_path, 'pyroJect/templates')
 
 	#=====[ project details	]=====
 	name = None
