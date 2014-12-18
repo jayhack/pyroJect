@@ -72,19 +72,6 @@ class PyroJect(object):
 						}
 
 
-	def build(self, path):
-		"""
-			creates the entire project 
-
-			Args:
-			-----
-			- path: location to create project
-		"""
-		self.copy_project_template(self.template_name, path)
-		self.modify_template_filenames(path)
-		self.modify_template_filecontents(path)
-
-
 	def get_template_dir(self, template_name):
 		"""
 			template name -> path of template directory 
@@ -94,15 +81,14 @@ class PyroJect(object):
 		if not template_name in os.listdir(templates_dir):
 			raise Exception("Template named %s does not exist" % template_name)
 		else:
-			return os.path.join(templates_dir, project_name)
+			return os.path.join(templates_dir, template_name)
 
 
-	def move_project_template(self, template_name, project_path):
+	def copy_project_template(self, template_name, project_path):
 		"""
 			moves the project template to desired location 
 		"""
-		template_dir = self.get_template_dir(template_name)
-		shutil.copytree(self.template_dir, project_path)
+		shutil.copytree(self.get_template_dir(template_name), project_path)
 
 
 	def modify_template_filenames(self, project_path):
@@ -120,8 +106,21 @@ class PyroJect(object):
 			changes contents of file according to self.metadata
 		"""
 		for root, dirs, files in os.walk(project_path):
-			for f in [open(os.path.join(root, f), 'r') for f in files]:
-				formatted = f.read().format(**self.metadata)
-				open(os.path.join(root, f), 'w').write(formatted)
+			for f in files:
+				filepath = os.path.join(root, f)
+				formatted = open(filepath, 'r').read().format(**self.metadata)
+				open(filepath,'w').write(formatted)
 
 
+	def build(self, path):
+		"""
+			creates the entire project 
+
+			Args:
+			-----
+			- path: location to create project
+		"""
+		project_dir = os.path.join(path, self.metadata['name'])
+		self.copy_project_template(self.template_name, project_dir)
+		self.modify_template_filenames(project_dir)
+		self.modify_template_filecontents(project_dir)

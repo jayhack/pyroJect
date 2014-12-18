@@ -5,7 +5,11 @@ Module: example_class
 Description:
 ------------
 
-{pyroject_header_foot}
+####################
+{author}
+{email}
+{date}
+####################
 """
 def example_class():
 	"""

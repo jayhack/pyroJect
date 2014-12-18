@@ -6,7 +6,11 @@ Description:
 ------------
 
 
-{pyroject_header_foot}
+####################
+{author}
+{email}
+{date}
+####################
 """
 import unittest
 import nose

@@ -1,0 +1,12 @@
+#=====[ Setup Files ]=====
+build
+dist
+*.egg-info
+
+#=====[ Temporary Files	]=====
+*.pyc
+*.pkl
+*.json
+*.npy
+*~
+

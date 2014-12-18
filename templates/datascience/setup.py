@@ -9,6 +9,10 @@ setup(
 		packages=find_packages(),
 		include_package_data=True,
 		install_requires=[
-			'click'
+			'click',
+			'scipy',
+			'numpy',
+			'pandas',
+			'scikit-learn'
 		]
 )

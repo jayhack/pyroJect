@@ -1,24 +1,23 @@
 """
-Module: inference
-=================
+Module: base_inference
+======================
 
 Description:
 ------------
 
-	Contains base classes for objects that deal with 
-	every aspect of performing inferences based on data.
+	Defines BaseInference, the most abstract class for dealing
+	with all aspects of inference. (train, predict, evalute, load,
+	save)
 
-{pyroject_header_foot}
+####################
+Jay Hack
+jhack@stanford.edu
+Fall 2014
+####################
 """
 import pickle
 import numpy as np
 import pandas as pd
-
-from util import *
-
-################################################################################
-####################[ BaseInference ]###########################################
-################################################################################
 
 class BaseInference(object):
 	"""
@@ -89,7 +88,6 @@ class BaseInference(object):
 		print_status('inference.train', 'featurizing data', verbose)
 		X, y = self.featurize(data)
 
-		print_status('inference.train', 'fitting model')
 		self.pipeline.fit(X, y)
 
 
@@ -112,7 +110,6 @@ class BaseInference(object):
 		"""
 			saves self.pipeline to specified path via pickle
 		"""
-		print_status('inference.save', 'saving model to path %s' % path)
 		pickle.dump(self.pipeline, open(path, 'w'))
 
 
@@ -120,51 +117,6 @@ class BaseInference(object):
 		"""
 			loads self.pipeline from a specified path 
 		"""
-		print_status('inference.load', 'loading model from path %s' % path)
 		self.pipeline = pickle.load(open(path, 'r'))
 
-
-
-
-
-
-
-
-
-################################################################################
-####################[ ScipyInference ]##########################################
-################################################################################
-
-from sklearn.pipeline import Pipeline
-from sklearn.cross_validation import cross_val_score
-
-class ScipyInference(BaseInference):
-	"""
-		Class: ScipyInference
-		=====================
-		
-		Description:
-		------------
-		Inference using the scipy stack: numpy, pandas, sklearn.
-
-		Performs evaluation using sklearn.cross_validation.cross_val_score
-
-	"""
-
-	def __init__(self):
-		super(ScipyInference, self).__init__()
-		
-
-	def evaluate(self, data, cv=5):
-		"""
-			evaluates the classifier 
-		"""
-		X, y = self.featurize(data)
-
-		print_status('inference.evaluate', 'running cross-validation', True)
-		scores = cross_val_score(self.pipeline, X, y, cv=5, verbose=2)
-		print "Cross Validation Scores:\n-------"
-		for i, s in enumerate(scores):
-			print "Cross-Validation run #%i: %s" % (i+1, str(s))
-		print "\nAverage: %s" % str(scores.mean())
 

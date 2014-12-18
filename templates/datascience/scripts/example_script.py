@@ -14,7 +14,11 @@ Usage:
 ------
 
 
-{pyroject_header_foot}
+####################
+{author}
+{email}
+{date}
+####################
 """
 import click
 @click.command()

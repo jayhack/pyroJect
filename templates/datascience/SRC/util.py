@@ -8,7 +8,11 @@ Description:
 	Contains basic utilities for interface, etc. 
 
 
-{pyroject_header_foot}
+####################
+{author}
+{email}
+{date}
+####################
 """
 
 ################################################################################
@@ -17,7 +21,7 @@ Description:
 
 def print_status(stage, status, verbose=True):
     """
-        prints status if verbose is true 
+        prints status if verbose is set
     """
     if verbose:
         print '-----> %s: %s' % (stage, status)
