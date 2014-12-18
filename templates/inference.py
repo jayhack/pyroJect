@@ -65,18 +65,14 @@ class BaseInference(object):
 			sets self.pipeline. self.pipeline must provide 
 			fit, transform and fit_transform methods.
 		"""
-		self._pipeline = None
+		self.pipeline = self.define_pipeline()
 
 
-	@property
-	def pipeline(self):
+	def define_pipeline(self, data):
 		"""
-			should provide fit, transform, and fit_transform methods
+			defines the pipeline 
 		"""
 		raise NotImplementedError
-	@pipeline.setter
-	def pipeline(self, value):
-		self._pipeline = value
 
 
 	def featurize(self, data):
@@ -95,6 +91,14 @@ class BaseInference(object):
 
 		print_status('inference.train', 'fitting model')
 		self.pipeline.fit(X, y)
+
+
+	def classify(self, data):
+		"""
+			raw data -> predicted labels 
+		"""
+		X = self.featurize(data)
+		return self.pipeline.transform(X)
 
 
 	def evaluate(self, data):
