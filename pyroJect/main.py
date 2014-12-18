@@ -67,8 +67,7 @@ class PyroJect(object):
 	"""
 	#=====[ templates	]=====
 	base_path = os.path.join(os.path.split(__file__)[0], '..')
-	config_path = '~/.pyroJect_config'
-	templates_path = os.path.join(base_path, 'pyroJect/templates')
+	templates_path = os.path.join(base_path, 'templates')
 
 	#=====[ project details	]=====
 	name = None
@@ -78,7 +77,7 @@ class PyroJect(object):
 	email = None
 	date = None
 
-	def __init__(self, name, path, data):
+	def __init__(self, name, path, author, email, data):
 		"""
 			Merely initializes this project 
 
@@ -89,9 +88,13 @@ class PyroJect(object):
 				- data: boolean for wether there should be a data dir 
 		"""
 		self.name = name 
-		self.path = path 
+		self.path = path
+		self.author = author 
+		self.email = email
 		self.data = data
-		self.find_authorship()
+
+		print 'base_path: %s' % self.base_path
+		print 'templates_path: %s' % self.templates_path
 
 
 	def build(self):
@@ -105,27 +108,6 @@ class PyroJect(object):
 		self.make_data_dir()
 		self.make_gitignore()
 		self.make_setup_script()
-
-
-
-
-
-
-
-
-	################################################################################
-	####################[ GETTING PROJECT INFO ]####################################
-	################################################################################
-
-	def find_authorship(self):
-		"""
-			sets self.author, self.email, self.date
-		"""
-		self.author = click.prompt('Project author(s)' % str(self.author))
-		self.email = click.prompt('Project email(s)' % str(self.email))
-		self.date = time.strftime('%B %Y')
-
-
 
 
 
@@ -213,7 +195,7 @@ class PyroJect(object):
 			as a string 
 		"""
 		#=====[ Step 1: get the unformatted string	]=====
-		unformatted = open(os.path.join(self.templates_path, template_name + '.py'))
+		unformatted = open(os.path.join(self.templates_path, template_name)).read()
 
 		#=====[ Step 2: format + return	]=====
 		return unformatted.format(pyroject_header_foot=self.make_header_foot())
@@ -316,9 +298,9 @@ class PyroJect(object):
 			sets self.source_dir
 		"""
 		self.source_dir = self.make_module_dir(self.root_dir, self.name)
-		templates = ['example_class', 'util']
+		templates = ['example_class.py', 'util.py']
 		if self.data:
-			templates.append('inference')
+			templates.append('inference.py')
 		map(lambda t: self.insert_template(self.source_dir, t), templates)
 
 
@@ -329,7 +311,7 @@ class PyroJect(object):
 			sets self.scripts_dir 
 		"""
 		self.scripts_dir = self.make_module_dir(self.root_dir, 'scripts')
-		self.insert_template(self.scripts_dir, 'example_script')
+		self.insert_template(self.scripts_dir, 'example_script.py')
 
 
 	def make_tests_dir(self):
@@ -340,7 +322,7 @@ class PyroJect(object):
 		"""
 		#=====[ Step 1: make tests dir ]=====
 		self.tests_dir = self.make_module_dir(self.root_dir, 'tests')
-		self.insert_template('example_test')
+		self.insert_template(self.tests_dir, 'example_test.py')
 
 
 	def make_data_dir(self):
@@ -357,7 +339,7 @@ class PyroJect(object):
 		"""
 			makes gitignore file in the base directory 
 		"""
-		gitignore_src = os.path.join(self.templates_path, '.gitignore')
+		gitignore_src = os.path.join(self.templates_path, 'gitignore')
 		gitignore_dst = os.path.join(self.root_dir, '.gitignore')
 		shutil.copy(gitignore_src, gitignore_dst)
 

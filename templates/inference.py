@@ -74,7 +74,7 @@ class BaseInference(object):
 			should provide fit, transform, and fit_transform methods
 		"""
 		raise NotImplementedError
-	@pipeline.setter:
+	@pipeline.setter
 	def pipeline(self, value):
 		self._pipeline = value
 

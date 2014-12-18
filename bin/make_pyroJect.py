@@ -56,11 +56,13 @@ import click
 from pyroJect import *
 
 @click.command()
-@click.option('-n', '--name', type=str, prompt=True)
+@click.option('-n', '--project_name', type=str, prompt=True)
 @click.option('-p', '--path', type=click.Path(exists=True), prompt=True)
+@click.option('-a', '--author', type=str, prompt=True)
+@click.option('-e', '--email', type=str, prompt=True)
 @click.option('-d','--data', is_flag=True)
-def make_project(name, path, data):
-	PyroJect(name, path, data).build()
+def make_project(project_name, path, author, email, data):
+	PyroJect(project_name, path, author, email, data).build()
 
 
 if __name__ == '__main__':
