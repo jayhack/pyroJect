@@ -1,6 +1,6 @@
 """
-Script: pyroJect.py
-===================
+Script: make_pyroject.py
+========================
 
 Description:
 ------------

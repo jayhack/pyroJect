@@ -11,6 +11,7 @@ setup(
 		package_data={
 			'templates':['*']
 		},
+		scripts=['bin/make_pyroJect.py'],
 		install_requires=[
 			'click',
 			'scipy',
