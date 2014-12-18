@@ -107,7 +107,7 @@ class PyroJect(object):
 		self.make_tests_dir()
 		self.make_data_dir()
 		self.make_gitignore()
-		self.make_setup_script()
+		self.make_setup()
 
 
 
@@ -189,13 +189,21 @@ class PyroJect(object):
 	####################[ GENERATING FILES FROM TEMPLATES ]#########################
 	################################################################################
 
+	def get_raw_file_template(self, template_name):
+		"""
+			returns the raw (unformatted) template given by 
+			template_name 
+		"""
+		return open(os.path.join(self.templates_path, template_name)).read()
+
+
 	def get_file_template(self, template_name):
 		"""
 			returns the file template given by template_name
 			as a string 
 		"""
 		#=====[ Step 1: get the unformatted string	]=====
-		unformatted = open(os.path.join(self.templates_path, template_name)).read()
+		unformatted = self.get_raw_file_template(template_name)
 
 		#=====[ Step 2: format + return	]=====
 		return unformatted.format(pyroject_header_foot=self.make_header_foot())
@@ -350,7 +358,7 @@ class PyroJect(object):
 				python setup.py install 
 			in order to install your module
 		"""
-		unformatted = self.get_file_template('setup')
+		unformatted = self.get_raw_file_template('setup.py')
 		setup_contents = unformatted.format(name=self.name, author=self.author, email=self.email)
 		setup_dst = os.path.join(self.root_dir, 'setup.py')
 		open(setup_dst, 'w').write(setup_contents)
