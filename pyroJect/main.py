@@ -91,10 +91,8 @@ class PyroJect(object):
 		self.path = path
 		self.author = author 
 		self.email = email
+		self.date = time.strftime('%B %Y')
 		self.data = data
-
-		print 'base_path: %s' % self.base_path
-		print 'templates_path: %s' % self.templates_path
 
 
 	def build(self):
@@ -214,17 +212,9 @@ class PyroJect(object):
 			Will create a file containing 'contents' in the named module_dir 
 			returns path to file
 		"""
-		#=====[ Step 1: figure out name/path	]=====
-		if name[:-3] == '.py':
-			path = os.path.join(module_dir, name)
-			name = name[:-3]
-		else:
-			path = os.path.join(module_dir, name + '.py')
-
-		#=====[ Step 2: open file and write	]=====
+		path = os.path.join(module_dir, name)
 		open(path, 'w').write(contents)
 		return path
-
 
 	def insert_template(self, module_dir, name):
 		"""

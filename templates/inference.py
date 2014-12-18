@@ -134,7 +134,7 @@ class BaseInference(object):
 from sklearn.pipeline import Pipeline
 from sklearn.cross_validation import cross_val_score
 
-class ScipyInfernce(BaseInference):
+class ScipyInference(BaseInference):
 	"""
 		Class: ScipyInference
 		=====================
