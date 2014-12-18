@@ -17,13 +17,12 @@ Fall 2014
 import os
 import unittest
 import nose
-from nose.utils import *
 import numpy as np
 import pandas as pd
 
-from pyroJect.inference import ScipyInference
+from inference import ScipyInference
 from sklearn.pipeline import Pipeline
-from sklearn.preprocess import PCA
+from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 
 class Inference(ScipyInference):
@@ -32,7 +31,7 @@ class Inference(ScipyInference):
 	"""
 
 	def __init__(self):
-		super(ScipyInference, self).__init__(self)
+		super(ScipyInference, self).__init__()
 
 	def define_pipeline(self):
 		return Pipeline([
@@ -42,7 +41,7 @@ class Inference(ScipyInference):
 
 	def featurize(self, data):
 		if 'label' in data.columns:
-			X = data[set(data.columns) - set(['label'])].as_matrix()
+			X = data[list(set(data.columns) - set(['label']))].as_matrix()
 			y = data['label'].as_matrix()
 			return X, y
 		else:
@@ -58,11 +57,11 @@ class Test_EXAMPLE(unittest.TestCase):
 	####################[ setUp/tearDown	]#######################################
 	################################################################################
 
-	def setUp():
+	def setUp(self):
 		"""
 			sets self.data_dir, self.model_path, self.data
 		"""
-		self.data_dir = os.split(__file__)[0] #current directory
+		self.data_dir = os.path.split(__file__)[0] #current directory
 		self.model_path = os.path.join(self.data_dir, 'model.pkl')
 
 		#=====[ Step 2: get data	]=====
@@ -70,7 +69,7 @@ class Test_EXAMPLE(unittest.TestCase):
 		self.data['label'] = self.data.sum(axis=1) > 0
 
 
-	def tearDown():
+	def tearDown(self):
 		"""
 			removes the model, if it exists
 		"""
@@ -101,7 +100,9 @@ class Test_EXAMPLE(unittest.TestCase):
 		inference = Inference()
 		inference.train(self.data.iloc[:50])
 		output = inference.classify(self.data.iloc[50:][range(10)])
-		self.assertEqual(output.shape, (100,))
+		self.assertEqual(output.shape, (50,))
+		correct = output == self.data.iloc[50:]['label']
+		self.assertTrue(correct.sum() > 40)
 
 
 	def test_evaluate(self):
