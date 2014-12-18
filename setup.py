@@ -5,7 +5,7 @@ setup(
 		version='0.0.1',
 		author='Jay Hack',
 		author_email='jhack@stanford.edu',
-		description='',
+		description='utility to quickly create python project skeletons',
 		packages=find_packages(),
 		include_package_data=True,
 		install_requires=[

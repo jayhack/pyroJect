@@ -117,39 +117,13 @@ class PyroJect(object):
 	####################[ GETTING PROJECT INFO ]####################################
 	################################################################################
 
-	def read_config(self):
-		"""
-			returns (author, email) from config file;
-			raises exception if it doesn't exist
-		"""
-		d = json.load(open(self.config_path,'r').read())
-		return d['author'], d['email']
-
-
 	def find_authorship(self):
 		"""
 			sets self.author, self.email, self.date
 		"""
-		#=====[ Step 1: get defaults from config	]=====
-		if os.path.exists(self.config_path):
-			self.author, self.email = self.read_config()
-
+		self.author = click.prompt('Project author(s)' % str(self.author))
+		self.email = click.prompt('Project email(s)' % str(self.email))
 		self.date = time.strftime('%B %Y')
-
-		#=====[ Step 2: option to override	]=====
-		self.author = click.prompt(
-									'Enter project author(s) [%s]' % str(self.author),
-									default=self.author
-								)
-		self.email = click.prompt(
-									'Enter author(s) email(s) [%s]' % str(self.email),
-									default=self.email
-								)
-		self.date = click.prompt(
-									'Enter project date [%s]' % str(self.date),
-									default=self.date
-								)
-
 
 
 
